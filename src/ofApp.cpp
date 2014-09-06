@@ -299,6 +299,9 @@ void ofApp::keyPressed(int key){
             }
             printf("thresould = %d\n", threshold);
             break;
+        case 's':
+            ofSaveFrame();
+            break;
         case 't':
             startTimer();
             break;

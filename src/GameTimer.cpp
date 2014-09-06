@@ -11,7 +11,8 @@
 #include <string>
 #include "config.h"
 
-#define TIME_LIMIT_SEC 30
+#define TIME_LIMIT_SEC 5
+#define CAPTURE false
 
 
 void GameTimer::setup() {
@@ -80,7 +81,7 @@ bool GameTimer::update() {
             if (scale <= 1) {
                 scale += 0.05;
             }
-            alpha -= 2;
+            alpha -= 5;
         }
 
         return true;
@@ -88,11 +89,13 @@ bool GameTimer::update() {
     //timeup!
     else if(!isEndAllAnimation) {
         if (lastStep == 1) {
+            // Save drawed Image
             lastStep = 0;
             text = "time up!";
             font.loadFont("kremlin.ttf", 13, true, true, true);
             scale = 0.1;
             alpha = 255;
+            if(CAPTURE)ofSaveFrame();
         }
         if (scale <= 1) {
             scale += 0.05;
