@@ -1,4 +1,5 @@
 #include "ofApp.h"
+#include "config.h"
 
 #define CWIDTH 640
 #define CHEIGHT 480
@@ -6,45 +7,11 @@
 #define FRAME_DIFFERENCE 50.0
 #define DTHRESHOLD 30.0
 
-#define DWIDTH 1440
 
 void ofApp::hit(int score, float x, float y){
     hits[animationIndex].start(score, x, y);
     if (++animationIndex == MAX_ANIMATION) animationIndex = 0;
     totalScore += score;
-}
-
-bool ofApp::isValidFrame(ofxCvColorImage prevFrame, ofxCvColorImage curFrame){
-    
-    unsigned char* prev_pixels = prevFrame.getRoiPixels();
-    unsigned char* cur_pixels = curFrame.getRoiPixels();
-    float diff_sum = 0;
-    
-    float iw = prevFrame.width;
-    float ih = prevFrame.height;
-    
-    if (iw != curFrame.width || ih != curFrame.height) {
-        //lastFrame = curFrame;
-        return false;
-    }
-    
-    for(int i=0; i < iw * ih * COLORCH; i++){
-        float diff_pixel = fabs(prev_pixels[i] - cur_pixels[i]);
-        diff_sum += diff_pixel;
-    }
-    
-    diff_sum /= iw * ih * COLORCH;
-    //printf("Frame diff: %f\n", diff_sum);
-    
-    if (diff_sum > FRAME_DIFFERENCE) {
-        // Too big difference between two frames
-//        printf("Invlid frame: %f\n", diff_sum);
-        return false;
-    } else {
-        // Valid frame
-        lastFrame = curFrame;
-        return true;
-    }
 }
 
 bool ofApp::isValidFrameROI(ofxCvColorImage* prevFrame, ofxCvColorImage* curFrame){
@@ -85,12 +52,14 @@ void ofApp::startTimer() {
     timerGraphic.start();
     totalScore = 0;
     isRunningTimer = true;
+    bDisplayHit = true;
     printf("Start Timer\n");
 }
 
 void ofApp::startEndingAnimation(int totalScore){
     edAnimation.start(totalScore);
     isRunningEndingAnimation = true;
+    bDisplayHit = false;
     
     for (int i = 0; i < MAX_ANIMATION; i++) {
         hits[i].isEndingMode = true;
@@ -105,7 +74,7 @@ void ofApp::setup(){
     animationIndex = 0;
     
     vidGrabber.setVerbose(true);
-    vidGrabber.setDeviceID(1);
+    vidGrabber.setDeviceID(0);
     vidGrabber.initGrabber(CWIDTH, CHEIGHT);
     
     colorImg.allocate(CWIDTH, CHEIGHT);
@@ -129,9 +98,7 @@ void ofApp::setup(){
     edAnimation.setup();
     
     // Initialization
-    for (int i = 0; i < MAX_ANIMATION; i++) {
-        hits[i].setup();
-    }
+    HitAnimation::loadData();
 }
 
 //--------------------------------------------------------------
@@ -267,7 +234,7 @@ void ofApp::draw(){
                 // No item in list
                 alreadyHit.push_back(detectPoint);
                 hit(score_area * score_area,
-                    detectPoint.x * 1280/(drawendx - drawstartx) + 1440,
+                    detectPoint.x * 1280/(drawendx - drawstartx) + DWIDTH,
                     detectPoint.y * 800/(drawendy - drawstarty));
             } else {
                 // At least one item in list
@@ -276,18 +243,15 @@ void ofApp::draw(){
                     if (detectPoint.distance(*ait) < DTHRESHOLD) {
                         break;
                     }
-                    
                 }
                 
                 if (ait == alreadyHit.end()) {
-                    printf("%f, %f\n", (*ait).x, (*ait).y);
                     alreadyHit.push_back(detectPoint);
                     hit(score_area * score_area,
-                        detectPoint.x * 1280/(drawendx - drawstartx) + 1440,
+                        detectPoint.x * 1280/(drawendx - drawstartx) + DWIDTH,
                         detectPoint.y * 720/(drawendy - drawstarty));
                 }
             }
-            printf("Already Size: %d\n", (int)alreadyHit.size());
         }
    }
     
@@ -339,18 +303,22 @@ void ofApp::keyPressed(int key){
             startTimer();
             break;
         case 'r':
-            bGetROI = false;
+            for (int i = 0; i < MAX_ANIMATION; i++) {
+                hits[i].del();
+            }
+            alreadyHit.clear();
+            bDisplayHit = false;
             break;
         case 'o':
             startOpeningAnimation();
             break;
         case 'h':
+            // Demonstration Mode
             startOpeningAnimation();
-            bDisplayHit = !bDisplayHit;
-            printf("Display hit: %d\n", bDisplayHit);
+            break;
         case 'd':
+            // Debug Mode
             bDisplayHit = !bDisplayHit;
-            printf("Display hit: %d\n", bDisplayHit);
         default:
             break;
     }

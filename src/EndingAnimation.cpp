@@ -9,7 +9,7 @@
 #include "EndingAnimation.h"
 #include <sstream>
 #include <string>
-
+#include "config.h"
 
 void EndingAnimation::setup() {
     // フォント設定
@@ -22,12 +22,9 @@ void EndingAnimation::setup() {
     bgImg.loadImage("total_score.png");
 }
 
-
-
-
 void EndingAnimation::start(int score) {
     alpha = 255;
-    position.x = 1440 + 1280 /2.0;
+    position.x = DWIDTH + 1280 /2.0;
     position.y = ofGetHeight() / 2;
 //    scoreText = toString(score);
     totalScore = score;
@@ -35,12 +32,7 @@ void EndingAnimation::start(int score) {
     elapsedTime = 0;
 }
 
-
-
-
-
 // -------- loop --------
-
 bool EndingAnimation::update() { //アニメ−ションが終わったらfalseを返す。
     if (elapsedTime < 1000) {
         
@@ -75,10 +67,6 @@ void EndingAnimation::draw() {
         ofPopMatrix();
     }
 }
-
-
-
-
 
 // -------------------- private ---------------------
 string EndingAnimation::toString(int n) {

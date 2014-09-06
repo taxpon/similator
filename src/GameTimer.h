@@ -38,4 +38,9 @@ public:
     
 private:
     string toString(int n);
+    float scale;
+    void setLastMode();
+    bool isLastMode;
+    int lastStep;
+    bool isEndAllAnimation;
 };

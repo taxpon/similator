@@ -29,7 +29,6 @@ class ofApp : public ofBaseApp{
     
     
         void hit(int score, float x, float y);
-        bool isValidFrame(ofxCvColorImage, ofxCvColorImage);
         bool isValidFrameROI(ofxCvColorImage*, ofxCvColorImage*);
     
         ofVideoGrabber vidGrabber;

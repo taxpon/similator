@@ -9,6 +9,7 @@
 #include "OpeningAnimation.h"
 #include <sstream>
 #include <string>
+#include "config.h"
 
 
 void OpeningAnimation::setup() {
@@ -26,7 +27,7 @@ void OpeningAnimation::start() {
     alpha = 255;
     step = 0;
     textScale = 0;
-    position.x = 1440 + 1280 /2.0;
+    position.x = DWIDTH + 1280 /2.0;
     position.y = ofGetHeight() / 2 - 100;
     text = "Ready";
 }

@@ -116,6 +116,7 @@
 		3C37E44619BB1F0C00ED3487 /* yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = yellow.png; path = bin/data/yellow.png; sourceTree = "<group>"; };
 		3C37E44719BB1F0C00ED3487 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = red.png; path = bin/data/red.png; sourceTree = "<group>"; };
 		3C7BA5A819BAA55A0097436A /* ofxCvImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxCvImage.cpp; path = ../../../addons/ofxOpenCv/src/ofxCvImage.cpp; sourceTree = "<group>"; };
+		3CD988D619BB6CDE00916536 /* config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 		3CF75D0119BACDB80055EE8B /* HitAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HitAnimation.cpp; sourceTree = "<group>"; };
 		3CF75D0219BACDB80055EE8B /* HitAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HitAnimation.h; sourceTree = "<group>"; };
 		3CF75D0319BACDB80055EE8B /* EndingAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EndingAnimation.cpp; sourceTree = "<group>"; };
@@ -719,6 +720,7 @@
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
+				3CD988D619BB6CDE00916536 /* config.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;

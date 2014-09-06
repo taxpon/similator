@@ -20,24 +20,27 @@ public:
     void setup();
     void draw();
     void update();
+    void del();
     void start(int score,float x, float y);
+    static void loadData();
 
     bool isEndingMode;
     
     string scoreText;
     int scoreInt;
-    ofTrueTypeFont scoreFont;
     ofVec2f position;
     int alpha;
     int scoreAlpha;
     bool isEnd;
     float size;
     
+    static ofTrueTypeFont scoreFont;    
+    static ofImage hitImageGreen;
+    static ofImage hitImageYellow;
+    static ofImage hitImageRed;
+    static ofSoundPlayer hitSound;
     
-    ofImage hitImageGreen;
-    ofImage hitImageYellow;
-    ofImage hitImageRed;
-    ofSoundPlayer hitSound;
+    HitAnimation();
 
 private:
     string toString(int n);
