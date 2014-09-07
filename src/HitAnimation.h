@@ -33,6 +33,7 @@ public:
     int scoreAlpha;
     bool isEnd;
     float size;
+    float time_zoom;
     
     static ofTrueTypeFont scoreFont;    
     static ofImage hitImageGreen;
@@ -44,5 +45,6 @@ public:
 
 private:
     string toString(int n);
+    float easeInOut(float, float, float, float);
     float scoreScale;
 };

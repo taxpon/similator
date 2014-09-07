@@ -9,6 +9,11 @@
 #ifndef similator_config_h
 #define similator_config_h
 
-#define DWIDTH 0
+#define DWIDTH 0//1440
+
+#define PWIDTH 1280
+#define PHEIGHT 800
+
+#define CAM_INDEX 0
 
 #endif

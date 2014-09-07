@@ -69,12 +69,12 @@ void ofApp::startEndingAnimation(int totalScore){
 //--------------------------------------------------------------
 void ofApp::setup(){
     
-    ofBackground(255,255,255);
+    ofBackground(0, 0, 0);
     ofEnableSmoothing();
     animationIndex = 0;
     
     vidGrabber.setVerbose(true);
-    vidGrabber.setDeviceID(0);
+    vidGrabber.setDeviceID(CAM_INDEX);
     vidGrabber.initGrabber(CWIDTH, CHEIGHT);
     
     colorImg.allocate(CWIDTH, CHEIGHT);
@@ -176,6 +176,11 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     
+    ofFill();
+    ofSetHexColor(0xFFFFFF);
+    ofRect(DWIDTH, 0, PWIDTH, PHEIGHT);
+    //ofSetHexColor(0xffffff);
+
     
     ofSetHexColor(0xffffff);
 //    colorImg.setROI(ofRect(0, 0, 120, 120));

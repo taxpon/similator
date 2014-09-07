@@ -13,6 +13,7 @@
 #define SIZE_INCREACE_SPEED 2.5
 #define MAX_SIZE 100
 #define ENDING_MODE_ALPHA 100
+#define HIT_DURATION 0.2
 
 ofImage HitAnimation::hitImageGreen;
 ofImage HitAnimation::hitImageYellow;
@@ -43,6 +44,7 @@ HitAnimation::HitAnimation(){
     scoreAlpha = 0;
     scoreScale = 0;
     size = 0;
+    time_zoom = 0;
 }
 
 void HitAnimation::start(int score,float x, float y) {
@@ -59,15 +61,12 @@ void HitAnimation::start(int score,float x, float y) {
 // -------- loop --------
 void HitAnimation::update() {
     if (alpha > 0) {
-        if (size <= MAX_SIZE) {
-            size += SIZE_INCREACE_SPEED;
-        }
-        else {
-            //            alpha -= 5;f
-        }
-        if (scoreAlpha <= 255) {
-            scoreAlpha += 5;
-            scoreScale += 0.02;
+        if (size <= MAX_SIZE && time_zoom <= HIT_DURATION) {
+            //size += SIZE_INCREACE_SPEED;
+            time_zoom += 0.01;
+            size = easeInOut(time_zoom, 0, MAX_SIZE, HIT_DURATION);
+            scoreAlpha = easeInOut(time_zoom, 0, 255, HIT_DURATION);
+            scoreScale = easeInOut(time_zoom, 0, 1, HIT_DURATION);
         }
     }
 }
@@ -75,11 +74,11 @@ void HitAnimation::update() {
 void HitAnimation::draw() {
     if (alpha > 0) {
         if(scoreInt > 10000){
-            ofSetColor(113, 188, 76, scoreAlpha);
+            ofSetColor(163, 238, 126, scoreAlpha);
         } else if(scoreInt > 5000){
-            ofSetColor(243, 219, 57, scoreAlpha);
+            ofSetColor(255, 255, 107, scoreAlpha);
         } else {
-            ofSetColor(236, 66, 61, scoreAlpha);
+            ofSetColor(255, 116, 101, scoreAlpha);
         }
         if (isEndingMode) ofSetColor(0, 255, 0, ENDING_MODE_ALPHA);
         float scoreX = position.x - 65;
@@ -99,7 +98,7 @@ void HitAnimation::draw() {
         float imgY = position.y - ((size + SIZE_INCREACE_SPEED) / 2);
         if(scoreInt > 10000){
             HitAnimation::hitImageGreen.draw(imgX, imgY, size*2.0, size*2.0);
-        } else if(scoreInt > 6000){
+        } else if(scoreInt > 5000){
             HitAnimation::hitImageYellow.draw(imgX, imgY, size*1.5, size*1.5);
         } else {
             HitAnimation::hitImageRed.draw(imgX, imgY, size, size);
@@ -109,9 +108,8 @@ void HitAnimation::draw() {
 
 void HitAnimation::del(){
     alpha = 0;
+    time_zoom = 0;
 }
-
-
 
 // -------------------- private ---------------------
 string HitAnimation::toString(int n) {
@@ -120,3 +118,14 @@ string HitAnimation::toString(int n) {
     std::string result = stream.str();
     return result;
 }
+
+float HitAnimation::easeInOut(float t, float b, float e, float d){
+    t /= d/2.0;
+    if(t < 1){
+        return (e/2.0)*t*t +b;
+    } else {
+        t = t-1;
+        return -e/2.0 * (t*(t-2) - 1) + b;
+    }
+}
+
