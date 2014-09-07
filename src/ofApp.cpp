@@ -46,6 +46,8 @@ bool ofApp::isValidFrameROI(ofxCvColorImage* prevFrame, ofxCvColorImage* curFram
 void ofApp::startOpeningAnimation(){
     opAnimation.start();
     isRunningOpeningAnimation = true;
+    edAnimation.alpha = 0;
+    edAnimation.isNewScore = false;
 }
 
 void ofApp::startTimer() {
@@ -54,9 +56,15 @@ void ofApp::startTimer() {
     isRunningTimer = true;
     bDisplayHit = true;
     printf("Start Timer\n");
+    
+    if (totalScore >= bestScore) {
+        bestScore = totalScore;
+        edAnimation.isNewScore = true;
+    }
 }
 
 void ofApp::startEndingAnimation(int totalScore){
+    printf("total score: %d\n", totalScore);
     edAnimation.start(totalScore);
     isRunningEndingAnimation = true;
     bDisplayHit = false;
@@ -103,6 +111,7 @@ void ofApp::setup(){
     
     // Logo
     similator_logo.loadImage("similator.png");
+    bestScore = 0;
 }
 
 //--------------------------------------------------------------
@@ -300,6 +309,9 @@ void ofApp::draw(){
         if(befor_timer == 10){
             bLearnBackground = true;
         }
+        if(befor_timer == 1){
+            startOpeningAnimation();
+        }
         befor_timer--;
     }
 }
@@ -347,7 +359,6 @@ void ofApp::keyPressed(int key){
             break;
         case 'h':
             // Demonstration Mode
-            startOpeningAnimation();
             befor_timer = 10;
             break;
         case 'd':

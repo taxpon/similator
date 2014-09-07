@@ -45,6 +45,7 @@ HitAnimation::HitAnimation(){
     scoreScale = 0;
     size = 0;
     time_zoom = 0;
+    time_score = 0;
 }
 
 void HitAnimation::start(int score,float x, float y) {
@@ -74,15 +75,6 @@ void HitAnimation::update() {
             scorePosition.x = easeInOut(time_score, position.x, -50, SCORE_DURATION);
             scoreAlpha = easeInOut(time_score, 255, -255, SCORE_DURATION);
         }
-
-//        if(size >= MAX_SIZE /2){
-//            if(scoreScale <= 1){
-//                scoreScale += 0.02;
-//            } else {
-//                scorePosition.x -= 2;
-//            }
-//            scoreAlpha -= 2.5;
-//        }
     }
 }
 
@@ -124,6 +116,10 @@ void HitAnimation::draw() {
 void HitAnimation::del(){
     alpha = 0;
     scoreAlpha = 0;
+    scoreText = "";
+    scoreInt = 0;
+    scoreScale = 0;
+    size = 0;
     time_zoom = 0;
     time_score = 0;
 }

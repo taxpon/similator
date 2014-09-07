@@ -33,4 +33,6 @@ public:
 private:
     string toString(int n);
     int step;
+    ofSoundPlayer sound_ready;
+    ofSoundPlayer sound_go;
 };

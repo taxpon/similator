@@ -15,6 +15,6 @@
 #define PHEIGHT 800
 
 #define CAM_INDEX 1
-#define TIME_LIMIT_SEC 20
+#define TIME_LIMIT_SEC 5
 
 #endif

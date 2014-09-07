@@ -19,6 +19,7 @@ void GameTimer::setup() {
     ofTrueTypeFont::setGlobalDpi(700);//72);
     font.setLineHeight(18.0f);
     font.setLetterSpacing(1.037);
+    countdownSound.loadSound("countdown.wav");
 }
 
 void GameTimer::start() {
@@ -35,6 +36,7 @@ void GameTimer::start() {
 }
 
 void GameTimer::setLastMode() {
+    countdownSound.play();
     isLastMode = true;
     font.loadFont("kremlin.ttf", 40, true, true, true);
     position.x = DWIDTH + PWIDTH / 2;

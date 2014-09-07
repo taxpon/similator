@@ -33,6 +33,9 @@ public:
     int randScore;
     
     ofImage bgImg;
+    ofImage newScoreImg;
+    
+    bool isNewScore;
     
     unsigned long long startTime;
     unsigned long long currentTime;
@@ -41,4 +44,6 @@ public:
 private:
     string toString(int n);
     ofTrueTypeFont ptsFont;
+    ofSoundPlayer drumrollSound;
+    int newScoreAlpha;
 };

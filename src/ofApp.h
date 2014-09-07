@@ -84,5 +84,6 @@ class ofApp : public ofBaseApp{
         bool isRunningTimer;
     
         int befor_timer;
+        int bestScore;
     
 };
