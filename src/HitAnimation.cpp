@@ -14,6 +14,7 @@
 #define MAX_SIZE 100
 #define ENDING_MODE_ALPHA 100
 #define HIT_DURATION 0.2
+#define SCORE_DURATION 0.5
 
 ofImage HitAnimation::hitImageGreen;
 ofImage HitAnimation::hitImageYellow;
@@ -41,7 +42,6 @@ void HitAnimation::loadData(){
 
 HitAnimation::HitAnimation(){
     alpha = 0;
-    scoreAlpha = 0;
     scoreScale = 0;
     size = 0;
     time_zoom = 0;
@@ -49,10 +49,13 @@ HitAnimation::HitAnimation(){
 
 void HitAnimation::start(int score,float x, float y) {
     alpha = 255;
+    scoreAlpha = 255;
     scoreText = toString(score);
     scoreInt = score;
     position.x = x;
     position.y = y;
+    scorePosition.x = x;
+    scorePosition.y = y;
     
     // Play sound
     hitSound.play();
@@ -65,9 +68,21 @@ void HitAnimation::update() {
             //size += SIZE_INCREACE_SPEED;
             time_zoom += 0.01;
             size = easeInOut(time_zoom, 0, MAX_SIZE, HIT_DURATION);
-            scoreAlpha = easeInOut(time_zoom, 0, 255, HIT_DURATION);
             scoreScale = easeInOut(time_zoom, 0, 1, HIT_DURATION);
+        } else if(time_score <= SCORE_DURATION){
+            time_score += 0.01;
+            scorePosition.x = easeInOut(time_score, position.x, -50, SCORE_DURATION);
+            scoreAlpha = easeInOut(time_score, 255, -255, SCORE_DURATION);
         }
+
+//        if(size >= MAX_SIZE /2){
+//            if(scoreScale <= 1){
+//                scoreScale += 0.02;
+//            } else {
+//                scorePosition.x -= 2;
+//            }
+//            scoreAlpha -= 2.5;
+//        }
     }
 }
 
@@ -81,8 +96,8 @@ void HitAnimation::draw() {
             ofSetColor(255, 116, 101, scoreAlpha);
         }
         if (isEndingMode) ofSetColor(0, 255, 0, ENDING_MODE_ALPHA);
-        float scoreX = position.x - 65;
-        float scoreY = position.y;
+        float scoreX = scorePosition.x - 65;
+        float scoreY = scorePosition.y;
         ofPushMatrix();
             ofTranslate(scoreX, scoreY);
             ofScale(scoreScale, scoreScale, 1);
@@ -108,7 +123,9 @@ void HitAnimation::draw() {
 
 void HitAnimation::del(){
     alpha = 0;
+    scoreAlpha = 0;
     time_zoom = 0;
+    time_score = 0;
 }
 
 // -------------------- private ---------------------

@@ -12,6 +12,7 @@
 #endif /* defined(__animationFunction__EndingAnimation__) */
 #pragma once
 #include "ofMain.h"
+#include "ofxCenteredTrueTypeFont.h"
 
 
 class EndingAnimation {
@@ -23,7 +24,7 @@ public:
     void start(int score);
     
     ofVec2f position;
-    ofTrueTypeFont font;
+    ofxCenteredTrueTypeFont font;
     string scoreText;
     int alpha;
     bool isEnd;

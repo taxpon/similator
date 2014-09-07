@@ -54,16 +54,17 @@ bool EndingAnimation::update() { //アニメ−ションが終わったらfalse�
 
 void EndingAnimation::draw() {
     if (alpha > 0) {
-        ofSetColor(0,0,0, alpha);
+        ofSetColor(255, 255, 255, alpha);
 
         bgImg.draw(1440, 0, 1280, 720);
         
+        ofSetColor(0, 0, 0, alpha);
         // total score
         ofPushMatrix();
             ofTranslate(position.x, position.y);
             ofRotateZ(-90);
-            font.drawString(scoreText, (-font.stringWidth(scoreText)/2) - 50, 0);
-            ptsFont.drawString("pts", 100, 0);
+            font.drawStringCentered(scoreText, 90, 0);
+            ptsFont.drawString("pts", 50, 100);
         ofPopMatrix();
     }
 }

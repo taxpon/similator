@@ -62,6 +62,7 @@ class ofApp : public ofBaseApp{
         list<ofPoint>::iterator ait;
         int totalScore;
         ofPoint point_center;
+        ofImage similator_logo;
     
         // Hit
         HitAnimation hits[MAX_ANIMATION];
@@ -81,5 +82,7 @@ class ofApp : public ofBaseApp{
         GameTimer timerGraphic;
         void startTimer();
         bool isRunningTimer;
+    
+        int befor_timer;
     
 };

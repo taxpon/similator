@@ -91,6 +91,7 @@ void ofApp::setup(){
     bFirstFrame = true;
     threshold = 50;
     roteatedeg = 0;
+    befor_timer = 0;
     
     // module setup
     timerGraphic.setup();
@@ -99,6 +100,9 @@ void ofApp::setup(){
     
     // Initialization
     HitAnimation::loadData();
+    
+    // Logo
+    similator_logo.loadImage("similator.png");
 }
 
 //--------------------------------------------------------------
@@ -169,7 +173,6 @@ void ofApp::update(){
             isRunningEndingAnimation = false;
         }
     }
-    
     bValidFrame = isValidFrameROI(&colorBg, &colorImg);
 }
 
@@ -281,6 +284,24 @@ void ofApp::draw(){
     if (isRunningEndingAnimation) {
         edAnimation.draw();
     }
+    
+    
+    if (!isRunningEndingAnimation
+        && !isRunningTimer
+        && !isRunningOpeningAnimation
+        && !bDisplayHit
+        && befor_timer == 0){
+                similator_logo.draw(DWIDTH + PWIDTH/2.0 - 125, 0);
+        ofSetColor(0, 0, 0, 255);
+        //similator_logo.draw(0, 0, 250, 720);
+    }
+    
+    if (befor_timer != 0) {
+        if(befor_timer == 10){
+            bLearnBackground = true;
+        }
+        befor_timer--;
+    }
 }
 
 //--------------------------------------------------------------
@@ -316,6 +337,10 @@ void ofApp::keyPressed(int key){
             }
             alreadyHit.clear();
             bDisplayHit = false;
+            isRunningOpeningAnimation = false;
+            isRunningEndingAnimation = false;
+            isRunningTimer = false;
+            totalScore = 0;
             break;
         case 'o':
             startOpeningAnimation();
@@ -323,6 +348,7 @@ void ofApp::keyPressed(int key){
         case 'h':
             // Demonstration Mode
             startOpeningAnimation();
+            befor_timer = 10;
             break;
         case 'd':
             // Debug Mode

@@ -117,6 +117,8 @@
 		3C37E44719BB1F0C00ED3487 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = red.png; path = bin/data/red.png; sourceTree = "<group>"; };
 		3C7BA5A819BAA55A0097436A /* ofxCvImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxCvImage.cpp; path = ../../../addons/ofxOpenCv/src/ofxCvImage.cpp; sourceTree = "<group>"; };
 		3CD988D619BB6CDE00916536 /* config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		3CD988D719BBFC3800916536 /* ofxCenteredTrueTypeFont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxCenteredTrueTypeFont.h; sourceTree = "<group>"; };
+		3CD988D819BC008300916536 /* similator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = similator.png; path = bin/data/similator.png; sourceTree = "<group>"; };
 		3CF75D0119BACDB80055EE8B /* HitAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HitAnimation.cpp; sourceTree = "<group>"; };
 		3CF75D0219BACDB80055EE8B /* HitAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HitAnimation.h; sourceTree = "<group>"; };
 		3CF75D0319BACDB80055EE8B /* EndingAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EndingAnimation.cpp; sourceTree = "<group>"; };
@@ -409,6 +411,7 @@
 		3CF75D0D19BACFE10055EE8B /* data */ = {
 			isa = PBXGroup;
 			children = (
+				3CD988D819BC008300916536 /* similator.png */,
 				3C37E43F19BB1F0C00ED3487 /* Batang.ttf */,
 				3C37E44019BB1F0C00ED3487 /* coin.wav */,
 				3C37E44119BB1F0C00ED3487 /* cooperBlack.ttf */,
@@ -721,6 +724,7 @@
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
 				3CD988D619BB6CDE00916536 /* config.h */,
+				3CD988D719BBFC3800916536 /* ofxCenteredTrueTypeFont.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;

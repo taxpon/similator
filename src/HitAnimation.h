@@ -29,11 +29,13 @@ public:
     string scoreText;
     int scoreInt;
     ofVec2f position;
+    ofVec2f scorePosition;
     int alpha;
     int scoreAlpha;
     bool isEnd;
     float size;
     float time_zoom;
+    float time_score;
     
     static ofTrueTypeFont scoreFont;    
     static ofImage hitImageGreen;

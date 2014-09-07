@@ -11,7 +11,6 @@
 #include <string>
 #include "config.h"
 
-#define TIME_LIMIT_SEC 5
 #define CAPTURE false
 
 
@@ -38,8 +37,8 @@ void GameTimer::start() {
 void GameTimer::setLastMode() {
     isLastMode = true;
     font.loadFont("kremlin.ttf", 40, true, true, true);
-    position.x = ofGetWidth() / 2;
-    position.y = ofGetHeight() / 2;
+    position.x = DWIDTH + PWIDTH / 2;
+    position.y = PHEIGHT / 2 - 35;
 }
 
 // -------- loop --------
