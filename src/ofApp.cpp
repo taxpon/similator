@@ -97,6 +97,8 @@ void ofApp::setup(){
     bGetROI = false;
     bDisplayHit = false;
     bFirstFrame = true;
+    bShowLogo = true;
+    bEndIdling = false;
     threshold = 50;
     roteatedeg = 0;
     befor_timer = 0;
@@ -180,6 +182,7 @@ void ofApp::update(){
     if (isRunningEndingAnimation) {
         if (! edAnimation.update()) {
             isRunningEndingAnimation = false;
+            bEndIdling = true;
         }
     }
     bValidFrame = isValidFrameROI(&colorBg, &colorImg);
@@ -290,7 +293,7 @@ void ofApp::draw(){
     }
     
     // Ending Animation
-    if (isRunningEndingAnimation) {
+    if (isRunningEndingAnimation || bEndIdling) {
         edAnimation.draw();
     }
     
@@ -299,7 +302,9 @@ void ofApp::draw(){
         && !isRunningTimer
         && !isRunningOpeningAnimation
         && !bDisplayHit
-        && befor_timer == 0){
+        && !bEndIdling
+        && befor_timer == 0
+        && bShowLogo){
                 similator_logo.draw(DWIDTH + PWIDTH/2.0 - 125, 0);
         ofSetColor(0, 0, 0, 255);
         //similator_logo.draw(0, 0, 250, 720);
@@ -352,6 +357,7 @@ void ofApp::keyPressed(int key){
             isRunningOpeningAnimation = false;
             isRunningEndingAnimation = false;
             isRunningTimer = false;
+            bEndIdling = false;
             totalScore = 0;
             break;
         case 'o':
@@ -360,6 +366,9 @@ void ofApp::keyPressed(int key){
         case 'h':
             // Demonstration Mode
             befor_timer = 10;
+            break;
+        case 'l':
+            bShowLogo = !bShowLogo;
             break;
         case 'd':
             // Debug Mode

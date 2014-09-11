@@ -57,7 +57,9 @@ class ofApp : public ofBaseApp{
         bool bGetROI;
         bool bValidFrame;
         bool bFirstFrame;
-        
+        bool bShowLogo;
+        bool bEndIdling;
+    
         list<ofPoint> alreadyHit;
         list<ofPoint>::iterator ait;
         int totalScore;
